@@ -1,0 +1,17 @@
+users{
+id,
+firstname:
+lastname:
+email:
+password:
+cards[{
+			id,
+			cardname:string
+			front:string
+			back:string
+			type(code/text)
+			hints:[]
+			priority:number
+		}
+		]
+}
