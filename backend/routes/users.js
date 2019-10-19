@@ -31,4 +31,9 @@ router.post('/signup', async function (req, res, next) {
   }
 });
 
+router.get('/', async function (req, res, next) {
+  let userlist = await User.find();
+  res.send(userlist);
+});
+
 module.exports = router;

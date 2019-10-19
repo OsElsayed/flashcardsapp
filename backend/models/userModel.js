@@ -25,6 +25,10 @@ var userSchema = mongoose.Schema({
 userSchema.query.findUserByEmail = function (email) {
     return this.findOne({ email: email });
 };
+
+userSchema.query.findAll = function (email) {
+    return this.find({});
+};
 userSchema.query.findUserByEmailAndPassword = async function (email, password) {
     let user = await this.findOne({ email: email });
     if (user) {
