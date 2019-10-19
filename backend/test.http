@@ -1,0 +1,9 @@
+POST http://localhost:3000/users/signup HTTP/1.1
+content-type: application/json
+
+{ 
+ "firstName":"Noodle House",
+ "lastName":"Cuisine", 
+ "email":"ksgerges@mum.edu",
+ "password":"123456"
+ }
