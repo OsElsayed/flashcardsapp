@@ -5,8 +5,8 @@ let User = require('../models/userModel');
 /* GET users listing. */
 router.post('/signup', async function (req, res, next) {
   let user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    firstName: req.body.first,
+    lastName: req.body.last,
     email: req.body.email,
     password: req.body.password,
     role: 'normal'
