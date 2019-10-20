@@ -8,13 +8,15 @@ import { reducers, metaReducers } from './reducers';
 import { CardComponent } from './features/card/card.component';
 import { OverviewComponent } from './features/overview/overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatGridListModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatButtonModule, MatInputModule, MatIconModule, MatSlideToggleModule } from '@angular/material';
+import { CardFormComponent } from './features/card-form/card-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
-    OverviewComponent
+    OverviewComponent,
+    CardFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,10 @@ import { MatCardModule, MatGridListModule, MatButtonModule } from '@angular/mate
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
