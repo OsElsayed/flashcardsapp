@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('#!myTotalySecretKey!#');
 
-
 var userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
@@ -18,8 +17,10 @@ var userSchema = mongoose.Schema({
         hints: [{
             hint: String
         }]
-    }]
-});
+    }],
+}
+,
+{ typeKey: '$type' });
 
 
 userSchema.query.findUserByEmail = function (email) {

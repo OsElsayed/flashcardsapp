@@ -37,4 +37,30 @@ router.post('/signup', async function (req, res, next) {
   }
 });
 
+router.put('/update', async function (req, res, next) {
+  // Validate Request
+  if (!req.body) {
+    return res.status(400).send({
+      success: 0, msg: "user content can not be empty"
+    });
+  }
+  // Find and update user with the request body
+  User.findByIdAndUpdate(req.body._id, {
+    $push: { "cards": req.body.cards.$ }
+  }, { "new": true, "upsert": true })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({
+          success: 0, msg: "User not found with _id " + req.body._id
+        });
+      }
+      //
+      res.send({ success: 1, msg: "", user: user });
+    }).catch(err => {
+      return res.status(500).send({
+        success: 0, msg: "Something wrong updating user with _id " + req.body._id
+      });
+    });
+
+});
 module.exports = router;
