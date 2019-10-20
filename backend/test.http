@@ -15,7 +15,7 @@ content-type: application/json
     "_id":"5dabe4135274f222e8f2cebf",
     "cards":[
      {
-        "cardname": "ossama",
+        "cardname": "alialiali",
         "front": "hey there",
         "back": "hey back",
         "type": "text",

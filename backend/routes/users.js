@@ -37,6 +37,7 @@ router.post('/signup', async function (req, res, next) {
   }
 });
 
+// find user by id and push new card to cards array
 router.put('/update', async function (req, res, next) {
   // Validate Request
   if (!req.body) {
@@ -46,7 +47,7 @@ router.put('/update', async function (req, res, next) {
   }
   // Find and update user with the request body
   User.findByIdAndUpdate(req.body._id, {
-    $push: { "cards": req.body.cards.$ }
+    $push: { "cards": req.body.cards[0] }
   }, { "new": true, "upsert": true })
     .then(user => {
       if (!user) {
