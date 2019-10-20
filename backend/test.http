@@ -2,12 +2,37 @@ POST http://localhost:3000/users/signup HTTP/1.1
 content-type: application/json
 
 { 
- "firstName":"Noodle House",
+ "firstName":"Test3 TEst",
  "lastName":"Cuisine", 
- "email":"ksgerges@mum.edu",
+ "email":"ssksgerg55465es@mum.edu",
  "password":"123456"
  }
 ####
 
-get http://localhost:3000/users HTTP/1.1
+
+POST http://localhost:3000/users/login HTTP/1.1
+content-type: application/json
+
+{ 
+ "email":"ssksgerg55465es@mum.edu",
+ "password":"123456"
+}
+####
+
+POST http://localhost:3000/users/login HTTP/1.1
+content-type: application/json
+
+{ 
+ "email":"ssksgerg999es@mum.edu",
+ "password":"1234566767"
+}
+
+#### 
+
+GET http://localhost:3000/api/protected/users HTTP/1.1
+content-type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGFjMTI0NGEyMjJhYzMyNDBjZmFkZTciLCJpYXQiOjE1NzE1NTgxMjF9.vdnYzHVZYE0K2h6Id7ANSBPDPhXdDSCtb9yKfebUiLg
+
+######
+GET http://localhost:3000/api/protected/users HTTP/1.1
 content-type: application/json
