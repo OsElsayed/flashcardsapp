@@ -3,6 +3,12 @@ var router = express.Router();
 let User = require('../models/userModel');
 
 /* GET users listing. */
+router.get("/", async function (req, res, next) {
+  let userlist = await User.find();
+  res.send(userlist);
+});
+
+// sign up route
 router.post('/signup', async function (req, res, next) {
   let user = new User({
     firstName: req.body.first,
