@@ -27,11 +27,13 @@ import { dataReducer } from './data-store/card/card.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { layoutReducer } from './data-store/layout/layout.reducer';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: "users", component: ListUsersComponent}
 ];
 
 
@@ -44,7 +46,8 @@ const MY_ROUTE: Routes = [
     MainBarComponent,
     CardComponent,
     OverviewComponent,
-    CardFormComponent
+    CardFormComponent,
+    ListUsersComponent
   ],
   imports: [
     BrowserModule,

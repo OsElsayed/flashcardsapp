@@ -30,4 +30,8 @@ export class UsersService {
     return this.http.get('http://localhost:3000/users/' + userId);
   }
 
+  getListUsers() {
+    return this.http.get('http://localhost:3000/users/');
+  }
+
 }

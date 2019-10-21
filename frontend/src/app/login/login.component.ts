@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     const result = await this.authService.login(this.myForm.value);
     if (result.status) {
       this.toastr.success("Login success", "Authentication");
-      this.router.navigate(['/']);
+      this.router.navigate(['/users']);
     } else {
       this.toastr.error(result.message, "Authentication");
     }
