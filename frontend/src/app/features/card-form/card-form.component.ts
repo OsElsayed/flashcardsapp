@@ -34,25 +34,22 @@ export class CardFormComponent implements OnInit {
       'hints': ['', Validators.required]
     });
 
-    this.mode$ = store.pipe(select(selectLayoutCardMode));
-    this.indexEdit$ = store.pipe(select(selectLayoutIndexEdit));
-    this.mode$.subscribe(() => {
-      this.currentCard$ = store.pipe(select(selectCardByIndex(this.indexEdit)));
-      this.currentCard$.subscribe((card) => {
-        console.log(card);
-        if (card) {
-          this.cardForm.patchValue(card, { emitEvent: false });
-        }
-      });
-    });
 
+  }
+
+  ngOnInit() {
+    this.mode$ = this.store.pipe(select(selectLayoutCardMode));
+    this.indexEdit$ = this.store.pipe(select(selectLayoutIndexEdit));
+    this.currentCard$ = this.store.pipe(select(selectCardByIndex(this.indexEdit)));
+    this.currentCard$.subscribe((card) => {
+      if (card) {
+        this.cardForm.patchValue(card, { emitEvent: false });
+      }
+    });
     this.indexEdit$.subscribe(value => {
       this.indexEdit = value;
       console.log(this.indexEdit);
     });
-  }
-
-  ngOnInit() {
   }
   cardForm: FormGroup;
   visible = true;
