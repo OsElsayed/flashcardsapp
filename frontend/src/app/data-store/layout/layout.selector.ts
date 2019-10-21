@@ -13,3 +13,8 @@ export const selectLayoutIndexEdit = createSelector(
     selectLayout,
     (state: LayoutState) => state.indexEdit
 );
+
+export const selectLayoutCurrentEditCard = createSelector(
+    selectLayout,
+    (state: LayoutState) => state.indexEdit
+);

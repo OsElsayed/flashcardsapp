@@ -11,6 +11,7 @@ import { Card } from 'src/app/models/card.interface';
 import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
 import { Observable } from 'rxjs';
 import { DataStoreState } from 'src/app/data-store/data.reducer';
+import { selectCardByIndex } from 'src/app/data-store/card/card.selector';
 
 @Component({
   selector: 'app-card-form',
@@ -21,6 +22,7 @@ export class CardFormComponent implements OnInit {
   mode$: Observable<CardMode>;
   indexEdit$: Observable<number>;
   indexEdit: number = 0;
+  currentCard$: Observable<Card>;
   constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
     this.cardForm = this.fb.group({
       'cardname': ['', [
@@ -34,6 +36,15 @@ export class CardFormComponent implements OnInit {
 
     this.mode$ = store.pipe(select(selectLayoutCardMode));
     this.indexEdit$ = store.pipe(select(selectLayoutIndexEdit));
+    this.mode$.subscribe(() => {
+      this.currentCard$ = store.pipe(select(selectCardByIndex(this.indexEdit)));
+      this.currentCard$.subscribe((card) => {
+        console.log(card);
+        if (card) {
+          this.cardForm.patchValue(card, { emitEvent: false });
+        }
+      });
+    });
 
     this.indexEdit$.subscribe(value => {
       this.indexEdit = value;

@@ -23,17 +23,22 @@ const _layoutReducer = createReducer(initialState,
         };
     }),
     on(action.DeleteCardMode, (state, { index }) => {
-        return {
-            ...state,
+        const data = {
             mode: CardMode.DELETE,
             indexEdit: index
+        }
+        return {
+            ...state, ...data
         };
     }),
     on(action.EditCardMode, (state, { index }) => {
+        const data = {
+            mode: CardMode.DELETE,
+            indexEdit: index
+        }
         return {
             ...state,
-            mode: CardMode.EDIT,
-            indexDelete: index
+            ...data
         };
 
     }),

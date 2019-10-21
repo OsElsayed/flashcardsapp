@@ -8,3 +8,7 @@ export const selectCards = createSelector(
     selectCardState,
     (state: CardState) => state.cards
 );
+
+export const selectCardByIndex = (index: number) => createSelector(selectCards, (allItems) => {
+    return allItems[index];
+});
