@@ -24,6 +24,7 @@ import { SignupComponent } from './signup/signup.component';
 import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './_service/auth.service';
 import { UsersService } from './_service/users.service';
+import { dataReducer } from './data-store/data/data.reducer';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -66,7 +67,7 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot(reducers, {
+    StoreModule.forRoot(dataReducer, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
