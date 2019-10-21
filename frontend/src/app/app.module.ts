@@ -8,7 +8,7 @@ import { reducers, metaReducers } from './reducers';
 import { CardComponent } from './features/card/card.component';
 import { OverviewComponent } from './features/overview/overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatGridListModule, MatButtonModule, MatInputModule, MatIconModule, MatSlideToggleModule, MatDialogModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatButtonModule, MatInputModule, MatIconModule, MatSlideToggleModule, MatDialogModule, MatChipsModule } from '@angular/material';
 import { CardFormComponent } from './features/card-form/card-form.component';
 
 @NgModule({
@@ -35,7 +35,8 @@ import { CardFormComponent } from './features/card-form/card-form.component';
     MatInputModule,
     MatIconModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
   ],
   entryComponents: [CardFormComponent],
   providers: [],
