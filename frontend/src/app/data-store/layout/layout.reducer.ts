@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as action from './layout.actions';
 
-enum CardMode { ADD, EDIT, DELETE }
+export enum CardMode { ADD, EDIT, DELETE }
 export interface LayoutState {
     mode: CardMode;
 }

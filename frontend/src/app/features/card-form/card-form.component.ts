@@ -1,13 +1,16 @@
+import { selectLayoutCardMode } from './../../data-store/layout/layout.selector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material';
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Store } from '@ngrx/store';
-import { DataState } from 'src/app/data-store/data/data.reducer';
+import { Store, select } from '@ngrx/store';
 import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/data/data.actions';
 import { Card } from 'src/app/models/card.interface';
+import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
+import { Observable } from 'rxjs';
+import { DataStoreState } from 'src/app/data-store/data-store.reducer';
 
 @Component({
   selector: 'app-card-form',
@@ -15,8 +18,9 @@ import { Card } from 'src/app/models/card.interface';
   styleUrls: ['./card-form.component.css']
 })
 export class CardFormComponent implements OnInit {
+  mode$: Observable<CardMode>;
 
-  constructor(private fb: FormBuilder, private store: Store<{ data: DataState }>) {
+  constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
     this.cardForm = fb.group({
       'cardname': ['', [
         Validators.required,
@@ -25,6 +29,11 @@ export class CardFormComponent implements OnInit {
       'back': ['', Validators.required],
       'type': ['', Validators.required],
       'hints': ['', Validators.required]
+    });
+
+    this.mode$ = store.pipe(select(selectLayoutCardMode));
+    this.mode$.subscribe(value => {
+      console.log(value);
     });
   }
 

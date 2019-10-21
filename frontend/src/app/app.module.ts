@@ -19,7 +19,6 @@ import { CardFormComponent } from './features/card-form/card-form.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MainBarComponent } from './main-bar/main-bar.component';
-import { metaReducers, reducers } from './reducers';
 import { SignupComponent } from './signup/signup.component';
 import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './_service/auth.service';
