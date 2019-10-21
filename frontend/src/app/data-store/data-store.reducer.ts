@@ -1,7 +1,7 @@
-import { DataState } from './data/data.reducer';
+import { CardState } from './card/card.reducer';
 import { LayoutState } from './layout/layout.reducer';
 
 export interface DataStoreState {
-    data: DataState,
+    card: CardState,
     layout: LayoutState
 }

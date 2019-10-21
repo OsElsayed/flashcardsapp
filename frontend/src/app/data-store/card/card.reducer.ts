@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import * as action from './data.actions';
+import * as action from './card.actions';
 import { Card } from 'src/app/models/card.interface';
 
-export interface DataState {
+export interface CardState {
     cards: Card[];
 }
 
-export const initialState: DataState = {
+export const initialState: CardState = {
     cards: [],
 };
 

@@ -6,7 +6,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store, select } from '@ngrx/store';
-import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/data/data.actions';
+import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
 import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
 import { Observable } from 'rxjs';
@@ -22,7 +22,7 @@ export class CardFormComponent implements OnInit {
   indexEdit$: Observable<number>;
   indexEdit: number = 0;
   constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
-    this.cardForm = fb.group({
+    this.cardForm = this.fb.group({
       'cardname': ['', [
         Validators.required,
       ]],

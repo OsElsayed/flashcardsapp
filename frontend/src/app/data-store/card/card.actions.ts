@@ -1,4 +1,4 @@
-import { Card } from './../../models/card.interface';
+import { Card } from '../../models/card.interface';
 import { createAction, props } from '@ngrx/store';
 
 export const AddCard = createAction('[Card] Add Card', props<{ card: Card }>());
