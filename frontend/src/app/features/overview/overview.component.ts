@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { DataStoreState } from 'src/app/data-store/data-store.reducer';
 import { Card } from 'src/app/models/card.interface';
 import { selectCards, selectCardState } from 'src/app/data-store/card/card.selector';
+import { AddCardMode } from 'src/app/data-store/layout';
 
 @Component({
   selector: 'app-overview',
@@ -15,12 +16,7 @@ import { selectCards, selectCardState } from 'src/app/data-store/card/card.selec
 export class OverviewComponent implements OnInit {
   cards$: Observable<Card[]>;
   constructor(public dialog: MatDialog, private store: Store<DataStoreState>) {
-
-    store.pipe(select(selectCardState)).subscribe(val => {
-      console.log(val);
-    })
     this.cards$ = store.pipe(select(selectCards));
-
   }
 
   ngOnInit() {
@@ -29,7 +25,9 @@ export class OverviewComponent implements OnInit {
     const dialogRef = this.dialog.open(CardFormComponent, {
       width: '550px',
     });
-
+    dialogRef.afterOpen().subscribe(() => {
+      this.store.dispatch(AddCardMode());
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });

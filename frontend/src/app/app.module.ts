@@ -28,12 +28,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { layoutReducer } from './data-store/layout/layout.reducer';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { dataStoreReducer } from './data-store';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: "users", component: ListUsersComponent}
+  { path: "users", component: ListUsersComponent }
 ];
 
 
@@ -72,7 +73,7 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot({ card: dataReducer, layout: layoutReducer }),
+    StoreModule.forRoot(dataStoreReducer),
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
