@@ -27,16 +27,7 @@ export class CardFormComponent implements OnInit {
       'hints': ['', Validators.required]
     });
   }
-  // export interface Card {
-  //   cardname: String,
-  //   front: String,
-  //   back: String,
-  //   type: String,
-  //   priority: Number,
-  //   hints: [{
-  //     hint: String
-  //   }]
-  // }
+
   ngOnInit() {
   }
   cardForm: FormGroup;
@@ -71,24 +62,8 @@ export class CardFormComponent implements OnInit {
     }
   }
 
-
-
-  // mapCardData(formData: FormGroup) {
-  //   return {
-  //     cardname: formData.value.nameControl,
-  //     front: String,
-  //     back: String,
-  //     type: String,
-  //     priority: Number,
-  //     hints: [{
-  //       hint: String
-  //     }]
-  //   }
-  // }
-
   addCard() {
     const card: Card = { ...this.cardForm.value, hints: this.hints };
-    console.log(card);
     this.store.dispatch(AddCard({ card: card }));
   }
 }
