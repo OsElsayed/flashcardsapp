@@ -1,4 +1,4 @@
-import { selectLayoutCardMode } from './../../data-store/layout/layout.selector';
+import { selectLayoutCardMode, selectLayoutIndexEdit } from './../../data-store/layout/layout.selector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +19,8 @@ import { DataStoreState } from 'src/app/data-store/data-store.reducer';
 })
 export class CardFormComponent implements OnInit {
   mode$: Observable<CardMode>;
-
+  indexEdit$: Observable<number>;
+  indexEdit: number = 0;
   constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
     this.cardForm = fb.group({
       'cardname': ['', [
@@ -32,8 +33,11 @@ export class CardFormComponent implements OnInit {
     });
 
     this.mode$ = store.pipe(select(selectLayoutCardMode));
-    this.mode$.subscribe(value => {
-      console.log(value);
+    this.indexEdit$ = store.pipe(select(selectLayoutIndexEdit));
+
+    this.indexEdit$.subscribe(value => {
+      this.indexEdit = value;
+      console.log(this.indexEdit);
     });
   }
 
@@ -74,5 +78,10 @@ export class CardFormComponent implements OnInit {
   addCard() {
     const card: Card = { ...this.cardForm.value, hints: this.hints };
     this.store.dispatch(AddCard({ card: card }));
+  }
+
+  editCard() {
+    const card: Card = { ...this.cardForm.value, hints: this.hints };
+    this.store.dispatch(EditCard({ index: this.indexEdit, card: card }));
   }
 }
