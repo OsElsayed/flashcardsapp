@@ -27,6 +27,7 @@ import { UsersService } from './_service/users.service';
 import { dataReducer } from './data-store/data/data.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { layoutReducer } from './data-store/layout/layout.reducer';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -69,7 +70,7 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot({ data: dataReducer }),
+    StoreModule.forRoot({ data: dataReducer, layout: layoutReducer }),
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,

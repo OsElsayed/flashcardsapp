@@ -7,7 +7,7 @@ export interface DataState {
 }
 
 export const initialState: DataState = {
-    cards: []
+    cards: [],
 };
 
 const _dataReducer = createReducer(initialState,
