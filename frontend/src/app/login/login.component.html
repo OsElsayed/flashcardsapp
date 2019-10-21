@@ -1,0 +1,23 @@
+<mat-card class="example-card">
+    <mat-card-header style="background-image: url('assets/images/download.jpg');">
+        <mat-card-title>Sign In</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="!myForm.get('email').valid">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" type="password" formControlName="password">
+                <mat-error *ngIf="!myForm.get('password').valid">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">LOGIN</button>
+        </form>
+    </mat-card-content>
+</mat-card>
