@@ -25,6 +25,7 @@
     "@material/menu": "^3.2.0",
     "@nebular/eva-icons": "4.4.0",
     "@nebular/theme": "^4.4.0",
+    "@ngrx/effects": "^8.4.0",
     "@ngrx/store": "^8.4.0",
     "@ngrx/store-devtools": "^8.4.0",
     "bootstrap": "^4.3.1",

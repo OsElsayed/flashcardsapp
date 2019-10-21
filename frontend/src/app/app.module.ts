@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FlipModule } from 'ngx-flip';
@@ -16,13 +17,13 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
-import { dataReducer } from './data-store/data/data.reducer';
-import { layoutReducer } from './data-store/layout/layout.reducer';
+import { dataStoreReducer, effects } from './data-store';
 import { CardFormComponent } from './features/card-form/card-form.component';
 import { CardComponent } from './features/card/card.component';
 import { OverviewComponent } from './features/overview/overview.component';
 import { FlipComponent } from './flip/flip.component';
 import { HomeComponent } from './home/home.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 import { LoginComponent } from './login/login.component';
 import { MainBarComponent } from './main-bar/main-bar.component';
 import { SignupComponent } from './signup/signup.component';
@@ -34,7 +35,8 @@ const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'review', component: FlipComponent }
+  { path: 'review', component: FlipComponent },
+  { path: "users", component: ListUsersComponent }
 ];
 
 
@@ -48,7 +50,8 @@ const MY_ROUTE: Routes = [
     CardComponent,
     OverviewComponent,
     CardFormComponent,
-    FlipComponent
+    FlipComponent,
+    ListUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,7 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot({ data: dataReducer, layout: layoutReducer }),
+    StoreModule.forRoot(dataStoreReducer),
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
@@ -85,7 +88,8 @@ const MY_ROUTE: Routes = [
     MatChipsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     FlipModule,
-    CommonModule
+    CommonModule,
+    EffectsModule.forRoot(effects)
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],

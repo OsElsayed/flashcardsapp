@@ -1,4 +1,4 @@
-import { selectLayoutCardMode } from './../../data-store/layout/layout.selector';
+import { selectLayoutCardMode, selectLayoutIndexEdit } from './../../data-store/layout/layout.selector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -6,11 +6,12 @@ import { MatChipInputEvent } from '@angular/material';
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store, select } from '@ngrx/store';
-import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/data/data.actions';
+import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
 import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
 import { Observable } from 'rxjs';
-import { DataStoreState } from 'src/app/data-store/data-store.reducer';
+import { DataStoreState } from 'src/app/data-store/data.reducer';
+import { selectCardByIndex } from 'src/app/data-store/card/card.selector';
 
 @Component({
   selector: 'app-card-form',
@@ -19,9 +20,11 @@ import { DataStoreState } from 'src/app/data-store/data-store.reducer';
 })
 export class CardFormComponent implements OnInit {
   mode$: Observable<CardMode>;
-
+  indexEdit$: Observable<number>;
+  indexEdit: number = 0;
+  currentCard$: Observable<Card>;
   constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
-    this.cardForm = fb.group({
+    this.cardForm = this.fb.group({
       'cardname': ['', [
         Validators.required,
       ]],
@@ -32,8 +35,20 @@ export class CardFormComponent implements OnInit {
     });
 
     this.mode$ = store.pipe(select(selectLayoutCardMode));
-    this.mode$.subscribe(value => {
-      console.log(value);
+    this.indexEdit$ = store.pipe(select(selectLayoutIndexEdit));
+    this.mode$.subscribe(() => {
+      this.currentCard$ = store.pipe(select(selectCardByIndex(this.indexEdit)));
+      this.currentCard$.subscribe((card) => {
+        console.log(card);
+        if (card) {
+          this.cardForm.patchValue(card, { emitEvent: false });
+        }
+      });
+    });
+
+    this.indexEdit$.subscribe(value => {
+      this.indexEdit = value;
+      console.log(this.indexEdit);
     });
   }
 
@@ -74,5 +89,10 @@ export class CardFormComponent implements OnInit {
   addCard() {
     const card: Card = { ...this.cardForm.value, hints: this.hints };
     this.store.dispatch(AddCard({ card: card }));
+  }
+
+  editCard() {
+    const card: Card = { ...this.cardForm.value, hints: this.hints };
+    this.store.dispatch(EditCard({ index: this.indexEdit, card: card }));
   }
 }

@@ -4,10 +4,15 @@ import * as action from './layout.actions';
 export enum CardMode { ADD, EDIT, DELETE }
 export interface LayoutState {
     mode: CardMode;
+    indexEdit: number;
+    indexDelete: number
+
 }
 
 export const initialState: LayoutState = {
-    mode: CardMode.ADD
+    mode: CardMode.ADD,
+    indexEdit: 0,
+    indexDelete: 0
 };
 
 const _layoutReducer = createReducer(initialState,
@@ -17,16 +22,23 @@ const _layoutReducer = createReducer(initialState,
             mode: CardMode.ADD
         };
     }),
-    on(action.DeleteCardMode, state => {
+    on(action.DeleteCardMode, (state, { index }) => {
+        const data = {
+            mode: CardMode.DELETE,
+            indexEdit: index
+        }
         return {
-            ...state,
-            mode: CardMode.DELETE
+            ...state, ...data
         };
     }),
-    on(action.EditCardMode, state => {
+    on(action.EditCardMode, (state, { index }) => {
+        const data = {
+            mode: CardMode.DELETE,
+            indexEdit: index
+        }
         return {
             ...state,
-            mode: CardMode.EDIT
+            ...data
         };
 
     }),
