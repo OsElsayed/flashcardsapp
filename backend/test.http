@@ -15,12 +15,12 @@ content-type: application/json
     "_id":"5dabe4135274f222e8f2cebf",
     "cards":[
      {
-        "cardname": "alialiali",
-        "front": "hey there",
-        "back": "hey back",
+        "cardname": "new test",
+        "front": "front front front",
+        "back": "back back back",
         "type": "text",
-        "priority": "12",
-        "hints": [{"hint": "difficult"}]
+        "priority": "2",
+        "hints": [{"hint": "easy"}]
      }
     ]
 }

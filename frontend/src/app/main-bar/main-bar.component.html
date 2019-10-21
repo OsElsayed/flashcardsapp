@@ -4,14 +4,13 @@
             <mat-toolbar-row>
                 <span>Flash Cards</span>
                 <div style="left: 29%; position: absolute;">
-                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()" routerLink="/home">Test</a>
+                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()" routerLink="/review">Test</a>
                 </div>
                 <span class="example-spacer"></span>
                 <a mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" routerLink="/login">Sign In</a>
-                <h2 class="smalltext" style="color: white;" *ngIf="authService.isLoggedIn()">Welcome :
-                    {{authService.currentUser.name}}</h2>
-                <a mat-raised-button color="warn" *ngIf="authService.isLoggedIn()" routerLink="/login"
-                    (click)="authService.logout()">Sign Out</a>
+                <h2 class="smalltext" style="color: white;" *ngIf="authService.isLoggedIn()">Welcome : {{authService.currentUser.name}}
+                </h2>
+                <a mat-raised-button color="warn" *ngIf="authService.isLoggedIn()" routerLink="/login" (click)="authService.logout()">Sign Out</a>
                 <a mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" routerLink="/signup">Sign Up</a>
             </mat-toolbar-row>
         </mat-toolbar>

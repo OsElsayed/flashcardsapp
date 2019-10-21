@@ -1,21 +1,27 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatTableModule, MatToolbarModule, MatChipsModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { FlipModule } from 'ngx-flip';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
+import { dataReducer } from './data-store/data/data.reducer';
+import { layoutReducer } from './data-store/layout/layout.reducer';
+import { CardFormComponent } from './features/card-form/card-form.component';
 import { CardComponent } from './features/card/card.component';
 import { OverviewComponent } from './features/overview/overview.component';
-import { CardFormComponent } from './features/card-form/card-form.component';
+import { FlipComponent } from './flip/flip.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MainBarComponent } from './main-bar/main-bar.component';
@@ -23,15 +29,12 @@ import { SignupComponent } from './signup/signup.component';
 import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './_service/auth.service';
 import { UsersService } from './_service/users.service';
-import { dataReducer } from './data-store/data/data.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { layoutReducer } from './data-store/layout/layout.reducer';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'review', component: FlipComponent }
 ];
 
 
@@ -44,7 +47,8 @@ const MY_ROUTE: Routes = [
     MainBarComponent,
     CardComponent,
     OverviewComponent,
-    CardFormComponent
+    CardFormComponent,
+    FlipComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,9 @@ const MY_ROUTE: Routes = [
     MatSlideToggleModule,
     MatDialogModule,
     MatChipsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    FlipModule,
+    CommonModule
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],

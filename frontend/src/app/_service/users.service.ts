@@ -30,4 +30,9 @@ export class UsersService {
     return this.http.get('http://localhost:3000/users/' + userId);
   }
 
+  getCurrentUserCards(email: string) {
+    //console.log(userId);
+    return this.http.get('http://localhost:3000/users/' + email);
+  }
+
 }
