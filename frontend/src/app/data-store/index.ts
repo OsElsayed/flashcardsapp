@@ -1,1 +1,2 @@
-export * from './data-store.reducer';
+export * from './data.reducer';
+export * from './data.effects';

@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.9",
     "@auth0/angular-jwt": "^3.0.0",
     "@material/menu": "^3.2.0",
+    "@ngrx/effects": "^8.4.0",
     "@ngrx/store": "^8.4.0",
     "@ngrx/store-devtools": "^8.4.0",
     "bootstrap": "^4.3.1",

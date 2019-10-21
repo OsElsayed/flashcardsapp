@@ -28,7 +28,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { layoutReducer } from './data-store/layout/layout.reducer';
 import { ListUsersComponent } from './list-users/list-users.component';
-import { dataStoreReducer } from './data-store';
+import { dataStoreReducer, effects } from './data-store';
+import { EffectsModule } from '@ngrx/effects';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -83,7 +84,8 @@ const MY_ROUTE: Routes = [
     MatSlideToggleModule,
     MatDialogModule,
     MatChipsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot(effects)
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],

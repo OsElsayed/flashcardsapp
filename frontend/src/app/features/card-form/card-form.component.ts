@@ -10,7 +10,7 @@ import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/card/card.acti
 import { Card } from 'src/app/models/card.interface';
 import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
 import { Observable } from 'rxjs';
-import { DataStoreState } from 'src/app/data-store/data-store.reducer';
+import { DataStoreState } from 'src/app/data-store/data.reducer';
 
 @Component({
   selector: 'app-card-form',

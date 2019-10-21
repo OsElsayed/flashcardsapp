@@ -3,7 +3,7 @@ import { Card } from 'src/app/models/card.interface';
 import { EditCardMode } from './../../data-store/layout/layout.actions';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { DataStoreState } from 'src/app/data-store/data-store.reducer';
+import { DataStoreState } from 'src/app/data-store/data.reducer';
 import { Observable } from 'rxjs';
 import { CardMode, selectLayoutCardMode } from 'src/app/data-store/layout';
 

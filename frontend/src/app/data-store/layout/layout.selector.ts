@@ -1,4 +1,4 @@
-import { DataStoreState } from './../data-store.reducer';
+import { DataStoreState } from '../data.reducer';
 import { LayoutState } from './layout.reducer';
 import { createSelector } from '@ngrx/store';
 
