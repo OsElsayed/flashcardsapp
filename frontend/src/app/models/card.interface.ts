@@ -1,4 +1,3 @@
-import { Hint } from './hint.interface';
 
 export interface Card {
   cardname: String,
@@ -6,5 +5,7 @@ export interface Card {
   back: String,
   type: String,
   priority: Number,
-  hints: Hint[]
+  hints: [{
+    hint: String
+  }]
 }

@@ -1,19 +1,15 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { JwtHelperService } from "@auth0/angular-jwt";
-import { tokenName } from "@angular/compiler";
-import { of, Observable } from "rxjs";
-import { catchError, mapTo, tap } from "rxjs/operators";
-import { config } from "./../config";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
-  currentUser: any;
-  helper = new JwtHelperService();
 
-  private readonly JWT_TOKEN = "JWT_TOKEN";
+  currentUser: any;
+  baseUrl: String = "http://localhost:3000";
+  helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {
     let token = localStorage.token;
@@ -22,48 +18,27 @@ export class AuthService {
     }
   }
 
-  login(user: { email: string; password: string }): Observable<any> {
-    return this.http
-      .post<any>(`${config.apiUrl}/users/login`, user, { observe: "response" })
-      .pipe(
-        tap(response => {
-          console.log("The header is: " + response.headers.get("auth-token"));
-          this.doLoginUser(user.email, response.body.token);
-          console.log(response);
-          return of(response.body.msg);
-        }),
-        catchError(error => {
-          return of(error.error.msg);
-        })
-      );
+  async login(credentials) {
+    try {
+      let result: any = await this.http.post(this.baseUrl + '/auth', credentials).toPromise();
+      if (result && result.token) {
+        localStorage.token = result.token;
+        this.currentUser = this.helper.decodeToken(result.token);
+        return { status: true };
+      }
+      else return { status: false, message: result.message };
+    } catch (error) {
+      console.error(error ? error.message : 'err');
+    }
 
-    //return of("success");
   }
-
-  private doLoginUser(email: string, token: String) {
-    this.currentUser = email;
-    this.storeTokens(token);
-  }
-
-  private doLogoutUser() {
+  logout() {
+    localStorage.removeItem('token');
     this.currentUser = null;
-    this.removeTokens();
-  }
-
-  private removeTokens() {
-    localStorage.removeItem(this.JWT_TOKEN);
-  }
-
-  private storeTokens(token: String) {
-    localStorage.setItem(this.JWT_TOKEN, JSON.stringify(token));
   }
 
   isLoggedIn() {
-    if (!localStorage.getItem(this.JWT_TOKEN)) return false;
+    if (!localStorage.token) return false;
     return true;
-  }
-
-  logout() {
-    this.doLogoutUser();
   }
 }
