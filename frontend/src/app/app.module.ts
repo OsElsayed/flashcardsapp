@@ -25,6 +25,8 @@ import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './_service/auth.service';
 import { UsersService } from './_service/users.service';
 import { dataReducer } from './data-store/data/data.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 const MY_ROUTE: Routes = [
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -67,13 +69,7 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot(dataReducer, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
+    StoreModule.forRoot({ data: dataReducer }),
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
@@ -82,7 +78,8 @@ const MY_ROUTE: Routes = [
     MatIconModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],

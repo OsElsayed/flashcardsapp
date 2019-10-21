@@ -1,7 +1,13 @@
+import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material';
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Store } from '@ngrx/store';
+import { DataState } from 'src/app/data-store/data/data.reducer';
+import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/data/data.actions';
+import { Card } from 'src/app/models/card.interface';
 
 @Component({
   selector: 'app-card-form',
@@ -10,20 +16,36 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 })
 export class CardFormComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private fb: FormBuilder, private store: Store<{ data: DataState }>) {
+    this.cardForm = fb.group({
+      'cardname': ['', [
+        Validators.required,
+      ]],
+      'front': ['', Validators.required],
+      'back': ['', Validators.required],
+      'type': ['', Validators.required],
+      'hints': ['', Validators.required]
+    });
+  }
+  // export interface Card {
+  //   cardname: String,
+  //   front: String,
+  //   back: String,
+  //   type: String,
+  //   priority: Number,
+  //   hints: [{
+  //     hint: String
+  //   }]
+  // }
   ngOnInit() {
   }
+  cardForm: FormGroup;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  hints: Hint[] = [
-    { hint: 'hint1' },
-    { hint: 'hint2' },
-    { hint: 'hint3' },
-  ];
+  hints: Hint[] = [];
   types: string[] = ['code', 'text'];
 
   add(event: MatChipInputEvent): void {
@@ -47,5 +69,26 @@ export class CardFormComponent implements OnInit {
     if (index >= 0) {
       this.hints.splice(index, 1);
     }
+  }
+
+
+
+  // mapCardData(formData: FormGroup) {
+  //   return {
+  //     cardname: formData.value.nameControl,
+  //     front: String,
+  //     back: String,
+  //     type: String,
+  //     priority: Number,
+  //     hints: [{
+  //       hint: String
+  //     }]
+  //   }
+  // }
+
+  addCard() {
+    const card: Card = { ...this.cardForm.value, hints: this.hints };
+    console.log(card);
+    this.store.dispatch(AddCard({ card: card }));
   }
 }
