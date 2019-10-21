@@ -8,6 +8,7 @@ var userSchema = mongoose.Schema({
     email: String,
     password: String,
     role: String,
+    status: Boolean,
     cards: [{
         cardname: String,
         front: String,
@@ -19,8 +20,8 @@ var userSchema = mongoose.Schema({
         }]
     }],
 }
-,
-{ typeKey: '$type' });
+    ,
+    { typeKey: '$type' });
 
 
 userSchema.query.findUserByEmail = function (email) {

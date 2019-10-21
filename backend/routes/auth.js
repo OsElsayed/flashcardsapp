@@ -13,6 +13,10 @@ router.post('/', async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email, password: req.body.password });
         if (!user) res.status(200).send({ message: 'User not found' });
+        if (user && user.status === false) {
+            res.send({ message: 'User not active' });
+            return
+        }
         const token = jwt.sign({ name: user.firstName, email: user.email, _id: user._id }, EYNC_KEY);
         res.status(200).send({ token });
     } catch (error) {

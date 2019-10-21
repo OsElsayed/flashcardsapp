@@ -15,7 +15,8 @@ router.post('/signup', async function (req, res, next) {
     lastName: req.body.last,
     email: req.body.email,
     password: req.body.password,
-    role: 'normal'
+    role: 'normal',
+    status: true
   });
 
   let existUser = await User.find().findUserByEmail(req.body.email);
