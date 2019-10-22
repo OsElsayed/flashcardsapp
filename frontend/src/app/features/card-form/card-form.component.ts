@@ -1,15 +1,15 @@
 import { selectLayoutCardMode, selectLayoutIndexEdit } from './../../data-store/layout/layout.selector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { MatChipInputEvent } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store, select } from '@ngrx/store';
 import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
 import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
-import { Observable } from 'rxjs';
+import { Observable, VirtualTimeScheduler } from 'rxjs';
 import { DataStoreState } from 'src/app/data-store/data.reducer';
 import { selectCardByIndex } from 'src/app/data-store/card/card.selector';
 
@@ -23,7 +23,11 @@ export class CardFormComponent implements OnInit {
   indexEdit$: Observable<number>;
   indexEdit: number = 0;
   currentCard$: Observable<Card>;
-  constructor(private fb: FormBuilder, private store: Store<DataStoreState>) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<DataStoreState>,
+    public dialogRef: MatDialogRef<CardFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { card: Card, index: number }) {
     this.cardForm = this.fb.group({
       'cardname': ['', [
         Validators.required,
@@ -33,27 +37,18 @@ export class CardFormComponent implements OnInit {
       'type': ['', Validators.required],
       'hints': ['', Validators.required]
     });
-
-    this.mode$ = store.pipe(select(selectLayoutCardMode));
-    this.indexEdit$ = store.pipe(select(selectLayoutIndexEdit));
-    this.mode$.subscribe(() => {
-      this.currentCard$ = store.pipe(select(selectCardByIndex(this.indexEdit)));
-      this.currentCard$.subscribe((card) => {
-        console.log(card);
-        if (card) {
-          this.cardForm.patchValue(card, { emitEvent: false });
-        }
-      });
-    });
-
-    this.indexEdit$.subscribe(value => {
-      this.indexEdit = value;
-      console.log(this.indexEdit);
-    });
+    console.log("this.data");
+    console.log(this.data);
+    if (this.data) {
+      this.cardForm.patchValue(this.data.card, { emitEvent: false });
+      this.indexEdit = this.data["index"];
+    }
   }
 
   ngOnInit() {
+    this.mode$ = this.store.pipe(select(selectLayoutCardMode));
   }
+
   cardForm: FormGroup;
   visible = true;
   selectable = true;
