@@ -11,8 +11,8 @@
 
 .front-card {
     height: calc(100% - 22px);
-    background-color: #FFCDD2;
-    padding: 20px;
+    padding: 15px;
+    border: 5px solid #E1BEE7;
 }
 .back-card{
     height: calc(100% - 22px);
