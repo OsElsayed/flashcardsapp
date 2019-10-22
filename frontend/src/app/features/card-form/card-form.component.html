@@ -32,10 +32,10 @@
                 (matChipInputTokenEnd)="add($event)">
         </mat-chip-list>
     </mat-form-field>
-    <button mat-button color="primary" (click)="addCard()" *ngIf="(mode$ | async) == 0">
+    <button mat-button color="primary" (click)="addCard()" *ngIf="mode == 0">
         Add Card
     </button>
-    <button mat-button color="primary" (click)="editCard()" *ngIf="(mode$ | async) == 1">
+    <button mat-button color="primary" (click)="editCard()" *ngIf="mode == 1">
         Edit Card
     </button>
 </form>

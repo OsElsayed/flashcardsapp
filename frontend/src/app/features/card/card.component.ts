@@ -30,7 +30,7 @@ export class CardComponent implements OnInit {
   editCard() {
     const dialogRef = this.dialog.open(CardFormComponent, {
       width: '550px',
-      data: { card: this.card, index: this.indexCard }
+      data: { card: this.card, index: this.indexCard, mode: CardMode.EDIT }
     });
 
     dialogRef.afterOpen().subscribe(() => {

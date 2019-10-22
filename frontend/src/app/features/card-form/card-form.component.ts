@@ -19,15 +19,16 @@ import { selectCardByIndex } from 'src/app/card-store/card/card.selector';
   styleUrls: ['./card-form.component.css']
 })
 export class CardFormComponent implements OnInit {
-  mode$: Observable<CardMode>;
+  // mode$: Observable<CardMode>;
   indexEdit$: Observable<number>;
   indexEdit: number = 0;
+  mode: number = CardMode.ADD;
   currentCard$: Observable<Card>;
   constructor(
     private fb: FormBuilder,
     private store: Store<DataStoreState>,
     public dialogRef: MatDialogRef<CardFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { card: Card, index: number }) {
+    @Inject(MAT_DIALOG_DATA) public data: { card: Card, index: number, mode: number }) {
     this.cardForm = this.fb.group({
       'cardname': ['', [
         Validators.required,
@@ -37,16 +38,15 @@ export class CardFormComponent implements OnInit {
       'type': ['', Validators.required],
       'hints': ['', Validators.required]
     });
-    console.log("this.data");
-    console.log(this.data);
     if (this.data) {
       this.cardForm.patchValue(this.data.card, { emitEvent: false });
       this.indexEdit = this.data["index"];
+      this.mode = this.data["mode"];
     }
   }
 
   ngOnInit() {
-    this.mode$ = this.store.pipe(select(selectLayoutCardMode));
+    // this.mode$ = this.store.pipe(select(selectLayoutCardMode));
   }
 
   cardForm: FormGroup;

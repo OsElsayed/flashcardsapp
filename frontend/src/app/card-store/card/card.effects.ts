@@ -1,6 +1,6 @@
+import { DeleteCard, AddCard, AddCardSuccess, LoadCards, EditCard, LoadCardsSuccess } from 'src/app/card-store/card/card.actions';
 import { User } from './../../models/user.interface';
 import { UsersService } from '../../_service/users.service';
-import { AddCard, AddCardSuccess, LoadCards, EditCard, LoadCardsSuccess } from './card.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, switchMap, catchError, tap, mergeMap, withLatestFrom, exhaustMap, concatMap } from 'rxjs/operators';
@@ -20,36 +20,10 @@ export class CardEffects {
 
     currentUser: any = this.authService.currentUser;
 
-    // addCard$ = createEffect(() => this.actions$.pipe(
-    //     ofType(AddCard),
-    //     exhaustMap(action => this.usersService.UpdateUser(this.currentUser._id, action)
-    //         .pipe(
-    //             map(() => (AddCardSuccess)),
-    //             catchError(() => EMPTY)
-    //         ))
-    // ));
-
     addCard$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(AddCard),
-                concatMap(action => of(action).pipe(
-                    withLatestFrom(this.store.pipe(select(selectCards)))
-                )),
-                exhaustMap(([action, cards]) => this.usersService.updateUserById(this.currentUser._id, { 'cards': cards })
-                    .pipe(
-                        map(() => (AddCardSuccess)),
-                        catchError(() => EMPTY)
-                    )),
-
-            ),
-        { dispatch: false }
-    );
-
-    editCard$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(EditCard),
+                ofType(AddCard, EditCard, DeleteCard),
                 concatMap(action => of(action).pipe(
                     withLatestFrom(this.store.pipe(select(selectCards)))
                 )),
