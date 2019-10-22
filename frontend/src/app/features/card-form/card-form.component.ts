@@ -82,12 +82,18 @@ export class CardFormComponent implements OnInit {
   }
 
   addCard() {
-    const card: Card = { ...this.cardForm.value, hints: this.hints };
-    this.store.dispatch(AddCard({ card: card }));
+    if (this.cardForm.valid) {
+      const card: Card = { ...this.cardForm.value, hints: this.hints };
+      this.store.dispatch(AddCard({ card: card }));
+      this.dialogRef.close();
+    }
   }
 
   editCard() {
-    const card: Card = { ...this.cardForm.value, hints: this.hints };
-    this.store.dispatch(EditCard({ index: this.indexEdit, card: card }));
+    if (this.cardForm.valid) {
+      const card: Card = { ...this.cardForm.value, hints: this.hints };
+      this.store.dispatch(EditCard({ index: this.indexEdit, card: card }));
+      this.dialogRef.close();
+    }
   }
 }
