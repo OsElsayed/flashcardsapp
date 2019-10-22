@@ -34,6 +34,31 @@ content-type: application/json
 }
 
 ###
+put http://localhost:3000/users/5dabe4135274f222e8f2cebf HTTP/1.1
+content-type: application/json
+
+{ 
+    "cards":[
+     {
+        "cardname": "new 111 ",
+        "front": "front front front",
+        "back": "back back back",
+        "type": "text",
+        "priority": "2",
+        "hints": [{"hint": "easy"}]
+     },
+          {
+        "cardname": "new 2222",
+        "front": "front front front",
+        "back": "back back back",
+        "type": "text",
+        "priority": "2",
+        "hints": [{"hint": "easy"}]
+     }
+    ]
+}
+
+###
 POST http://localhost:3000/users/signup HTTP/1.1
 content-type: application/json
 

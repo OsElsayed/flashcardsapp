@@ -17,8 +17,8 @@ export class UsersService {
     return this.http.post('http://localhost:3000/users/signup', usersData);
   }
 
-  UpdateUser(userId: string, usersData) {
-    return this.http.put('http://localhost:3000/users/update', usersData);
+  updateUserById(userId: string, usersData) {
+    return this.http.put('http://localhost:3000/users/' + userId, usersData);
   }
 
   getUserCardsById(userId: string) {
