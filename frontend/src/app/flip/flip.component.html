@@ -1,17 +1,29 @@
-<div *ngIf="authService.isLoggedIn()">
-    <br>
-    <div>
-        <mat-card>
+<div>
+    <mat-card>
+        <mat-card-content>
             <ngx-flip [flip]="flipDiv">
-                <div front>{{card.front}}</div>
-                <div back>{{card.back}}</div>
+                <div front class="front-card">
+                    <div class="front-card-color">
+                        <div class="card-content">
+                            {{card.front}}
+                        </div>
+                    </div>
+                </div>
+                <div back class="back-card">
+                    <div class="back-card-color">
+                        <div class="card-content">
+                            {{card.back}}
+                        </div>
+                    </div>
+                </div>
             </ngx-flip>
-        </mat-card>
-
-    </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-slide-toggle color="primary" (change)="rotate()">
+            </mat-slide-toggle>
+            <button mat-icon-button color="primary" (click)="refresh()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
 </div>
-<br>
-<button (click)="rotate()">Show Answer</button>
-<br><br>
-<button (click)="refresh()">Try again!</button>
-<br>
