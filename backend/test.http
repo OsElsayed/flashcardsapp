@@ -72,3 +72,8 @@ auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGFjMTI0NGEyMjJhYzM
 ######
 GET http://localhost:3000/api/protected/users HTTP/1.1
 content-type: application/json
+
+
+######
+GET http://localhost:3000/users/5dabe4135274f222e8f2cebf HTTP/1.1
+content-type: application/json

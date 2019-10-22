@@ -8,6 +8,37 @@ router.get("/", async function (req, res, next) {
     res.send(userlist);
 });
 
+
+// find user cards by id
+router.get('/:_id', async function (req, res, next) {
+    // Validate Request
+    console.log(req.params)
+    if (!req.params._id) {
+        return res.status(400).send({
+            success: 0,
+            msg: "user content can not be empty"
+        });
+    }
+    // Find and update user with the request body
+    User.findById(req.params._id, 'cards')
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    success: 0,
+                    msg: "User not found with _id " + req.params._id
+                });
+            }
+            //
+            res.send({ success: 1, msg: "", user: user });
+        }).catch(err => {
+            return res.status(500).send({
+                success: 0,
+                msg: "Something wrong updating user with _id " + req.params._id
+            });
+        });
+
+});
+
 // sign up route
 router.post('/signup', async function (req, res, next) {
     let user = new User({
@@ -66,6 +97,7 @@ router.put('/update', async function (req, res, next) {
         });
 
 });
+
 
 /* GET users listing. */
 router.get("/:email", async function (req, res, next) {
