@@ -1,37 +1,42 @@
-<div class="registarClass">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
-        <h2>Sign Up</h2>
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter your E-mail" id="email" formControlName="email">
-            <mat-error *ngIf="!userForm.get('email').valid">
-                Please enter a valid email address
-            </mat-error>
-        </mat-form-field>
-
-        <div formGroupName="passwordGroup">
+<mat-card class="example-card">
+    <mat-card-header style="background-image: url('assets/images/download.jpg');">
+        <mat-card-title>Sign Up</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <mat-form-field class="example-full-width">
-                <input type="password" matInput placeholder="Enter Password" id="password" formControlName="password">
-                <mat-error>
-                    Invalid password, Must contain at least one number and lowercase letter, and at least 6 or more
-                    characters
+                <input matInput placeholder="Enter your E-mail" id="email" formControlName="email">
+                <mat-error *ngIf="!userForm.get('email').valid">
+                    Please enter a valid email address
                 </mat-error>
             </mat-form-field>
 
+            <div formGroupName="passwordGroup">
+                <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Enter Password" id="password"
+                        formControlName="password">
+                    <mat-error>
+                        Invalid password, Must contain at least one number and lowercase letter, and at least 6 or more
+                        characters
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input type="password" matInput placeholder="Confirm Password" id="confirmPassword"
+                        formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                </mat-form-field>
+                <mat-error *ngIf="userForm.get('passwordGroup').hasError('notSame')">
+                    Passwords do not match
+                </mat-error>
+            </div>
             <mat-form-field class="example-full-width">
-                <input type="password" matInput placeholder="Confirm Password" id="confirmPassword"
-                    formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                <input type="text" matInput placeholder="first" id="name" formControlName="first">
             </mat-form-field>
-            <mat-error *ngIf="userForm.get('passwordGroup').hasError('notSame')">
-                Passwords do not match
-            </mat-error>
-        </div>
-        <mat-form-field class="example-full-width">
-            <input type="text" matInput placeholder="first" id="name" formControlName="first">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <input type="text" matInput placeholder="last" id="name" formControlName="last">
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="warn" [disabled]="!userForm.valid">Register</button>
-    </form>
-</div>
+            <mat-form-field class="example-full-width">
+                <input type="text" matInput placeholder="last" id="name" formControlName="last">
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="warn" [disabled]="!userForm.valid">Register</button>
+        </form>
+    </mat-card-content>
+</mat-card>
