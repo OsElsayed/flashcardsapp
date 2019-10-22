@@ -11,6 +11,7 @@ export class FlipComponent implements OnInit {
 
   flipDiv: boolean;
   card: {};
+  cardsList: [];
 
   constructor(private authService: AuthService, private userService: UsersService) { }
 
@@ -18,8 +19,8 @@ export class FlipComponent implements OnInit {
     let currentUser = this.authService.currentUser;
     if (currentUser) {
       this.userService.getCurrentUserCards(currentUser.email).subscribe((res) => {
-        let cardsList = res['user'].cards;
-        this.card = cardsList[this.randomNumber(cardsList.length)];
+        this.cardsList = res['user'].cards;
+        this.card = this.cardsList[this.randomNumber(this.cardsList.length)];
       });
     }
   }
@@ -29,8 +30,12 @@ export class FlipComponent implements OnInit {
   }
 
   randomNumber(max: number) {
-    let num = Math.floor(Math.random() * max) + 1
+    let num = Math.floor(Math.random() * max)
     return num
+  }
+
+  refresh() {
+    this.card = this.cardsList[this.randomNumber(this.cardsList.length)];
   }
 
 }
