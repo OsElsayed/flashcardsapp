@@ -25,6 +25,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.card);
   }
 
   editCard() {

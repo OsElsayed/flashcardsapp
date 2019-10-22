@@ -30,18 +30,17 @@ export class CardFormComponent implements OnInit {
     public dialogRef: MatDialogRef<CardFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { card: Card, index: number, mode: number }) {
     this.cardForm = this.fb.group({
-      'cardname': ['', [
-        Validators.required,
-      ]],
+      'cardname': ['', Validators.required],
       'front': ['', Validators.required],
       'back': ['', Validators.required],
       'type': ['', Validators.required],
-      'hints': ['', Validators.required]
+      'hints': ['']
     });
     if (this.data) {
       this.cardForm.patchValue(this.data.card, { emitEvent: false });
       this.indexEdit = this.data["index"];
       this.mode = this.data["mode"];
+      this.hints = this.data.card.hints;
     }
   }
 
