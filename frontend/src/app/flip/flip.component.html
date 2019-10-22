@@ -1,12 +1,11 @@
 <div *ngIf="authService.isLoggedIn()">
-    <div *ngFor="let card of listOfCards">
-        <br>
-        <ngx-flip [flip]="flipDiv">
-            <div front>{{card.front}}</div>
-            <div back>{{card.back}}</div>
-        </ngx-flip>
-        <br>
-        <button (click)="rotate()">Flip</button>
-        <br>
-    </div>
+    <br>
+    <ngx-flip [flip]="flipDiv">
+        <div front>{{card.front}}</div>
+        <div back>{{card.back}}</div>
+    </ngx-flip>
+    <br>
+    <button (click)="rotate()">Flip</button>
+    <br>
+
 </div>

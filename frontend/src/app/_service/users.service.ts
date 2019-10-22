@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   UpdateUser(userId: string, usersData) {
-    return this.http.put('http://localhost:3000/users/' + userId, usersData);
+    return this.http.put('http://localhost:3000/users/update', usersData);
   }
 
   DeleteUser(userId: string) {

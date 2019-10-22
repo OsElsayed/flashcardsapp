@@ -17,7 +17,7 @@ router.post('/', async (req, res, next) => {
             res.send({ message: 'User not active' });
             return
         }
-        const token = jwt.sign({ name: user.firstName, email: user.email, _id: user._id }, EYNC_KEY);
+        const token = jwt.sign({ name: user.firstName, email: user.email, _id: user._id, role: user.role }, EYNC_KEY);
         res.status(200).send({ token });
     } catch (error) {
         return next(error);

@@ -32,7 +32,7 @@ import { AuthService } from './_service/auth.service';
 import { UsersService } from './_service/users.service';
 
 const MY_ROUTE: Routes = [
-  { path: '', canActivate: [AuthGuard], component: HomeComponent },
+  { path: '', canActivate: [AuthGuard], component: OverviewComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'review', component: FlipComponent },

@@ -5,9 +5,11 @@
                 <span>Flash Cards</span>
 
                 <div style="left: 29%; position: absolute;">
+                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()" routerLink="/">Home</a>
                     <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()"
                         routerLink="/review">Review</a>
-                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()" routerLink="/users">Users</a>
+                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn() 
+                    && authService.currentUser.role === 'admin'" routerLink="/users">Users</a>
                 </div>
                 <span class="example-spacer"></span>
                 <a mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" routerLink="/login">Sign In</a>
