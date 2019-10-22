@@ -18,15 +18,6 @@ const _dataReducer = createReducer(initialState,
             cards
         };
 
-        // let lists = state.cards;
-        // lists = [...lists, card]
-        // // const cards = {
-        // //     ...state.cards, ...card
-        // // };
-        // return {
-        //     ...state,
-        //     cards: lists
-        // }
     }),
     on(action.DeleteCard, (state, { index }) => {
         let cards = state.cards;

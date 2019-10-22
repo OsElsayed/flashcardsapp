@@ -17,7 +17,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
-import { dataStoreReducer, effects } from './data-store';
+import { dataStoreReducer, effects } from './card-store';
 import { CardFormComponent } from './features/card-form/card-form.component';
 import { CardComponent } from './features/card/card.component';
 import { OverviewComponent } from './features/overview/overview.component';

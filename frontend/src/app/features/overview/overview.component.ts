@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { CardFormComponent } from '../card-form/card-form.component';
 import { Store, select } from '@ngrx/store';
-import { DataStoreState } from 'src/app/data-store/data.reducer';
+import { DataStoreState } from 'src/app/card-store/data.reducer';
 import { Card } from 'src/app/models/card.interface';
-import { selectCards, selectCardState } from 'src/app/data-store/card/card.selector';
-import { AddCardMode } from 'src/app/data-store/layout';
+import { selectCards, selectCardState } from 'src/app/card-store/card/card.selector';
+import { AddCardMode } from 'src/app/card-store/layout';
 
 @Component({
   selector: 'app-overview',

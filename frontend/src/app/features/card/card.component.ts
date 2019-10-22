@@ -1,11 +1,11 @@
-import { DeleteCard } from 'src/app/data-store/card/card.actions';
+import { DeleteCard } from 'src/app/card-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
-import { EditCardMode } from './../../data-store/layout/layout.actions';
+import { EditCardMode } from '../../card-store/layout/layout.actions';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { DataStoreState } from 'src/app/data-store/data.reducer';
+import { DataStoreState } from 'src/app/card-store/data.reducer';
 import { Observable } from 'rxjs';
-import { CardMode, selectLayoutCardMode } from 'src/app/data-store/layout';
+import { CardMode, selectLayoutCardMode } from 'src/app/card-store/layout';
 import { MatDialog } from '@angular/material';
 import { CardFormComponent } from '../card-form/card-form.component';
 

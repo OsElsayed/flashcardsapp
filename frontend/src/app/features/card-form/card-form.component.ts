@@ -1,4 +1,4 @@
-import { selectLayoutCardMode, selectLayoutIndexEdit } from './../../data-store/layout/layout.selector';
+import { selectLayoutCardMode, selectLayoutIndexEdit } from '../../card-store/layout/layout.selector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -6,12 +6,12 @@ import { MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/mater
 import { Hint } from 'src/app/models/hint.interface';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store, select } from '@ngrx/store';
-import { AddCard, DeleteCard, EditCard } from 'src/app/data-store/card/card.actions';
+import { AddCard, DeleteCard, EditCard } from 'src/app/card-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
-import { LayoutState, CardMode } from 'src/app/data-store/layout/layout.reducer';
+import { LayoutState, CardMode } from 'src/app/card-store/layout/layout.reducer';
 import { Observable, VirtualTimeScheduler } from 'rxjs';
-import { DataStoreState } from 'src/app/data-store/data.reducer';
-import { selectCardByIndex } from 'src/app/data-store/card/card.selector';
+import { DataStoreState } from 'src/app/card-store/data.reducer';
+import { selectCardByIndex } from 'src/app/card-store/card/card.selector';
 
 @Component({
   selector: 'app-card-form',

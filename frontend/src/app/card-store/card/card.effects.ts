@@ -1,4 +1,4 @@
-import { UsersService } from './../../_service/users.service';
+import { UsersService } from '../../_service/users.service';
 import { ADD_CARD, AddCard, AddCardSuccess } from './card.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
