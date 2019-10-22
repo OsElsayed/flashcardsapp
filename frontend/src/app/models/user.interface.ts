@@ -1,9 +1,10 @@
 import { Card } from './card.interface';
 export interface User {
-  firstName: String,
-  lastName: String,
-  email: String,
-  password: String,
-  role: String,
+  userId: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+  role: string,
   cards: Card[];
 }
