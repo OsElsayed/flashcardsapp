@@ -1,13 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav-content style="background-color: whitesmoke;">
-        <mat-toolbar color='warn'>
+        <mat-toolbar color='primary'>
             <mat-toolbar-row>
                 <span>Flash Cards</span>
 
-                <div style="left: 29%; position: absolute;">
-                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()" routerLink="/">Home</a>
-                    <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn()"
-                        routerLink="/review">Review</a>
+                <div class="flash-menu">
+                    <button mat-button *ngIf="authService.isLoggedIn()" routerLink="/">Home</button>
+                    <button mat-button *ngIf="authService.isLoggedIn()" routerLink="/review">Review</button>
                     <a mat-raised-button color="primary" *ngIf="authService.isLoggedIn() 
                     && authService.currentUser.role === 'admin'" routerLink="/users">Users</a>
                 </div>
