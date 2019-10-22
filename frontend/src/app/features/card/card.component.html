@@ -1,7 +1,7 @@
 <div class="flash-card">
     <mat-card>
         <mat-card-content>
-            <p>
+            <!-- <p>
                 {{ card.front }}
             </p>
             <p>
@@ -11,10 +11,14 @@
                 <span *ngFor="let hint of card.hints">
                     {{ hint.hint }}
                 </span>
-            </p>
+            </p> -->
+            <ngx-flip [flip]="flipStatus" (click)="flipCard()">
+                <div front class="front-card">{{card.front}}</div>
+                <div back class="back-card">{{card.back}}</div>
+            </ngx-flip>
         </mat-card-content>
         <mat-card-actions>
-            <mat-slide-toggle color="primary">
+            <mat-slide-toggle color="primary" (change)="flipCard()">
             </mat-slide-toggle>
             <button mat-icon-button color="primary" (click)="editCard()">
                 <mat-icon>edit</mat-icon>

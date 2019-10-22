@@ -4,4 +4,18 @@
   mat-card-actions {
       padding: 5px 10px;
   }
+  ngx-flip {
+    width: 250px;
+    height: 200px;
+}
 
+.front-card {
+    background-color: #FFCDD2;
+    height: calc( 100% - 22px );
+    padding: 20px;
+}
+.back-card {
+    background-color: #E1BEE7;
+    height: calc( 100% - 22px );
+    padding: 20px;
+}

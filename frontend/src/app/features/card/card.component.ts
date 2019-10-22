@@ -43,5 +43,9 @@ export class CardComponent implements OnInit {
     this.store.dispatch(DeleteCard({ index: this.indexCard }));
 
   }
+  flipStatus = false;
+  flipCard() {
+    this.flipStatus = !this.flipStatus;
+  }
 
 }
