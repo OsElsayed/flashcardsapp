@@ -77,4 +77,28 @@ router.get("/:email", async function (req, res, next) {
     }
 });
 
+
+// find user by id and push new card to cards array
+router.put('/updatestatus', async function (req, res, next) {
+    // Validate Request
+    if (!req.body) {
+        return res.status(400).send({
+            success: 0,
+            msg: "user content can not be empty"
+        });
+    }
+
+    User.findByIdAndUpdate(req.body._id, { $set: req.body }, function (err, result) {
+        if (err) {
+            return res.status(404).send({
+                success: 0,
+                msg: "User Update failed. " + req.body._id
+            });
+        }
+        return res.send({ success: 1, msg: "User updated Successfully", result: result });
+    });
+
+
+});
+
 module.exports = router;

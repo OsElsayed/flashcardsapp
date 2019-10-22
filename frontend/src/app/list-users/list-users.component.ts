@@ -1,28 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../_service/users.service';
 import { AuthService } from '../_service/auth.service';
-
-
-
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-// ];
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-users',
@@ -31,12 +10,12 @@ import { AuthService } from '../_service/auth.service';
 })
 export class ListUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'role'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'role', 'status'];
   dataSource: any;
 
   userLogged: boolean;
   
-  constructor(private userService: UsersService, private authService: AuthService) { }
+  constructor(private userService: UsersService, private authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userLogged=this.authService.isLoggedIn();
@@ -56,5 +35,27 @@ export class ListUsersComponent implements OnInit {
 isUserLogged(): boolean{
   return this.authService.isLoggedIn();
 }
+
+  updateUserStatus(email: string, status: boolean){
+    console.log(email, status);
+
+    const userDataList = this.dataSource.filter(item => item.email === email);
+    let userData;
+    if(userDataList){
+      userData = userDataList[0];
+    }
+
+    if(userData){
+      userData.status = status;
+      this.userService.UpdateUserUsingEmail(email, userData).subscribe(result => {
+        result
+        this.toastr.success("Update Success!", "Enable/Disable Roles");
+      }, error => {
+          this.toastr.error("Update Failed!", "Enable/Disable Roles");
+          userData.status = !status;
+      });
+    }
+    
+  }
 
 }

@@ -39,4 +39,8 @@ export class UsersService {
     return this.http.get('http://localhost:3000/users/');
   }
 
+  UpdateUserUsingEmail(email: string, userData){
+    return this.http.put('http://localhost:3000/users/updatestatus', userData);
+  }
+
 }
