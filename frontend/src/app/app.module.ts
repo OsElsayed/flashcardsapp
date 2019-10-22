@@ -14,14 +14,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { FlipModule } from 'ngx-flip';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { dataStoreReducer, effects } from './card-store';
-import { CardFormComponent } from './features/card-form/card-form.component';
-import { CardComponent } from './features/card/card.component';
-import { OverviewComponent } from './features/overview/overview.component';
-import { FlipComponent } from './flip/flip.component';
+import { CardFormComponent } from './protected/features/card-form/card-form.component';
+import { CardComponent } from './protected/features/card/card.component';
+import { OverviewComponent } from './protected/features/overview/overview.component';
+import { FlipComponent } from './protected/features/flip/flip.component';
 import { HomeComponent } from './home/home.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { LoginComponent } from './login/login.component';
@@ -31,12 +31,14 @@ import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './_service/auth.service';
 import { UsersService } from './_service/users.service';
 
+
 const MY_ROUTE: Routes = [
-  { path: '', canActivate: [AuthGuard], component: OverviewComponent },
+  { path: '', canActivate: [AuthGuard], loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule) },
+  // { path: '', canActivate: [AuthGuard], component: OverviewComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'review', component: FlipComponent },
-  { path: "users", component: ListUsersComponent }
+  // { path: 'review', component: FlipComponent },
+  // { path: "users", component: ListUsersComponent }
 ];
 
 
@@ -47,15 +49,15 @@ const MY_ROUTE: Routes = [
     SignupComponent,
     LoginComponent,
     MainBarComponent,
-    CardComponent,
-    OverviewComponent,
-    CardFormComponent,
-    FlipComponent,
-    ListUsersComponent
+    // CardComponent,
+    // OverviewComponent,
+    // CardFormComponent,
+    // FlipComponent,
+    // ListUsersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // AppRoutingModule,
     RouterModule.forRoot(MY_ROUTE),
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -76,7 +78,10 @@ const MY_ROUTE: Routes = [
     MatGridListModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot(dataStoreReducer),
+    // StoreModule.forRoot(dataStoreReducer),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
@@ -86,15 +91,14 @@ const MY_ROUTE: Routes = [
     MatDialogModule,
     MatChipsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    FlipModule,
+    // FlipModule,
     CommonModule,
-    EffectsModule.forRoot(effects),
+    // EffectsModule.forRoot(effects),
     //MatButtonToggleGroup
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],
 
-  entryComponents: [CardFormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
