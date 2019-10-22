@@ -80,7 +80,6 @@ const MY_ROUTE: Routes = [
     BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule,
-    MatButtonModule,
     MatInputModule,
     MatIconModule,
     MatSlideToggleModule,
@@ -89,7 +88,8 @@ const MY_ROUTE: Routes = [
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     FlipModule,
     CommonModule,
-    EffectsModule.forRoot(effects)
+    EffectsModule.forRoot(effects),
+    //MatButtonToggleGroup
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     AuthGuard, UsersService, DatePipe],

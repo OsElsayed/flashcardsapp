@@ -144,7 +144,7 @@ router.get("/:email", async function (req, res, next) {
 
 
 // find user by id and push new card to cards array
-router.put('/updatestatus', async function (req, res, next) {
+router.put('/update/status', async function (req, res, next) {
     // Validate Request
     if (!req.body) {
         return res.status(400).send({
@@ -153,7 +153,7 @@ router.put('/updatestatus', async function (req, res, next) {
         });
     }
 
-    User.findByIdAndUpdate(req.body._id, { $set: req.body }, function (err, result) {
+    User.findByIdAndUpdate(req.body._id, { $set: { 'status': req.body.status } }, function (err, result) {
         if (err) {
             return res.status(404).send({
                 success: 0,

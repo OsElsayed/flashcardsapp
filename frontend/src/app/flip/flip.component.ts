@@ -35,6 +35,9 @@ export class FlipComponent implements OnInit {
   }
 
   refresh() {
+    if (this.flipDiv) {
+      this.flipDiv = !this.flipDiv;
+    }
     this.card = this.cardsList[this.randomNumber(this.cardsList.length)];
   }
 
