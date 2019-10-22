@@ -19,10 +19,16 @@ export class OverviewComponent implements OnInit {
   constructor(public dialog: MatDialog, private store: Store<DataStoreState>) {
     this.cards$ = store.pipe(select(selectCards));
   }
-
+  breakpoint: any;
   ngOnInit() {
     this.store.dispatch(LoadCards());
+    this.breakpoint = (window.innerWidth <= 1200) ? 3 : 4;
   }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 1200) ? 3 : 4;
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(CardFormComponent, {
       width: '550px',
