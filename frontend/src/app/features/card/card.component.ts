@@ -25,9 +25,6 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.card);
-    console.log(this.indexCard);
-
   }
 
   editCard() {
@@ -35,8 +32,6 @@ export class CardComponent implements OnInit {
       width: '550px',
       data: { card: this.card, index: this.indexCard }
     });
-    console.log(this.indexCard);
-    console.log(this.card);
 
     dialogRef.afterOpen().subscribe(() => {
       this.store.dispatch(EditCardMode({ index: this.indexCard }));
