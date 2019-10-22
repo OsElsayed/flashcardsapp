@@ -36,7 +36,7 @@ export class UsersService {
 
   getCurrentUserCards(email: string) {
     //console.log(userId);
-    return this.http.get('http://localhost:3000/users/' + email);
+    return this.http.get('http://localhost:3000/users/email/' + email);
   }
 
   getListUsers() {

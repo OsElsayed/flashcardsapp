@@ -133,7 +133,7 @@ router.put('/:_id', async function (req, res, next) {
 });
 
 /* GET users listing. */
-router.get("/:email", async function (req, res, next) {
+router.get("/email/:email", async function (req, res, next) {
     let user = await User.find().findUserByEmail(req.params.email);
     if (!user) {
         res.json({ success: 0, msg: 'User not found with email' } + req.params.email);
