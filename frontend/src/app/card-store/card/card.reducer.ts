@@ -38,7 +38,13 @@ const _dataReducer = createReducer(initialState,
         };
 
     }),
+    on(action.LoadCardsSuccess, (state, { cards }) => {
+        return {
+            ...state,
+            cards: cards
+        };
 
+    }),
 );
 
 export function dataReducer(state, action) {

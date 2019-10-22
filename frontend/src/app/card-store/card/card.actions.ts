@@ -20,4 +20,4 @@ export const DeleteCardSuccess = createAction('[Card] Delete Card Success');
 
 export const LoadCards = createAction(LOAD_CARDS);
 export const LoadCardsFail = createAction('[Card] Load Card Fail');
-export const LoadCardsSuccess = createAction('[Card] Load Card Success');
+export const LoadCardsSuccess = createAction('[Card] Load Card Success', props<{ cards: Card[] }>());

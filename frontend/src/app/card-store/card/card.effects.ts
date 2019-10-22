@@ -1,5 +1,6 @@
+import { User } from './../../models/user.interface';
 import { UsersService } from '../../_service/users.service';
-import { ADD_CARD, AddCard, AddCardSuccess } from './card.actions';
+import { AddCard, AddCardSuccess, LoadCards, EditCard, LoadCardsSuccess } from './card.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { map, switchMap, catchError, tap, mergeMap, withLatestFrom, exhaustMap, concatMap } from 'rxjs/operators';
@@ -35,9 +36,6 @@ export class CardEffects {
                 concatMap(action => of(action).pipe(
                     withLatestFrom(this.store.pipe(select(selectCards)))
                 )),
-                tap(([action, cards]) => {
-                    console.log(cards)
-                }),
                 exhaustMap(([action, cards]) => this.usersService.updateUserById(this.currentUser._id, { 'cards': cards })
                     .pipe(
                         map(() => (AddCardSuccess)),
@@ -47,4 +45,31 @@ export class CardEffects {
             ),
         { dispatch: false }
     );
+
+    editCard$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(EditCard),
+                concatMap(action => of(action).pipe(
+                    withLatestFrom(this.store.pipe(select(selectCards)))
+                )),
+                exhaustMap(([action, cards]) => this.usersService.updateUserById(this.currentUser._id, { 'cards': cards })
+                    .pipe(
+                        map(() => (AddCardSuccess)),
+                        catchError(() => EMPTY)
+                    )),
+
+            ),
+        { dispatch: false }
+    );
+
+    loadCards$ = createEffect(() => this.actions$.pipe(
+        ofType(LoadCards),
+        mergeMap(() => this.usersService.getUserCardsById(this.currentUser._id)
+            .pipe(
+                map((result: any) => result.user),
+                map((user: User) => (LoadCardsSuccess({ 'cards': user.cards }))),
+                catchError(() => EMPTY)
+            ))
+    ));
 }

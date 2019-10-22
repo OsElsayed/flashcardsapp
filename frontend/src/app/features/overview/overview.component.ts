@@ -1,3 +1,4 @@
+import { LoadCards } from './../../card-store/card/card.actions';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
@@ -20,6 +21,7 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(LoadCards());
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(CardFormComponent, {
