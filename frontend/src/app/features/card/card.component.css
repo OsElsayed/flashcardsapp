@@ -10,12 +10,22 @@
 }
 
 .front-card {
+    height: calc(100% - 22px);
     background-color: #FFCDD2;
-    height: calc( 100% - 22px );
     padding: 20px;
 }
-.back-card {
+.back-card{
+    height: calc(100% - 22px);
     background-color: #E1BEE7;
-    height: calc( 100% - 22px );
     padding: 20px;
+}
+
+.back-card-color {
+    height: 100%;
+    overflow: auto;
+}
+
+.front-card-color {
+    height: 100%;
+    overflow: auto;
 }

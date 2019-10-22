@@ -1,20 +1,21 @@
 <div class="flash-card">
     <mat-card>
         <mat-card-content>
-            <!-- <p>
-                {{ card.front }}
-            </p>
-            <p>
-                {{ card.back }}
-            </p>
-            <p>
-                <span *ngFor="let hint of card.hints">
-                    {{ hint.hint }}
-                </span>
-            </p> -->
-            <ngx-flip [flip]="flipStatus" (click)="flipCard()">
-                <div front class="front-card">{{card.front}}</div>
-                <div back class="back-card">{{card.back}}</div>
+            <ngx-flip [flip]="flipStatus">
+                <div front class="front-card">
+                    <div class="front-card-color">
+                        <div class="card-content">
+                            {{card.front}}
+                        </div>
+                    </div>
+                </div>
+                <div back class="back-card">
+                    <div class="back-card-color">
+                        <div class="card-content">
+                            {{card.back}}
+                        </div>
+                    </div>
+                </div>
             </ngx-flip>
         </mat-card-content>
         <mat-card-actions>
