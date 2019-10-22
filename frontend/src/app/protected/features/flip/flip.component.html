@@ -1,0 +1,17 @@
+<div *ngIf="authService.isLoggedIn()">
+    <br>
+    <div>
+        <mat-card>
+            <ngx-flip [flip]="flipDiv">
+                <div front>{{card.front}}</div>
+                <div back>{{card.back}}</div>
+            </ngx-flip>
+        </mat-card>
+
+    </div>
+</div>
+<br>
+<button (click)="rotate()">Show Answer</button>
+<br><br>
+<button (click)="refresh()">Try again!</button>
+<br>

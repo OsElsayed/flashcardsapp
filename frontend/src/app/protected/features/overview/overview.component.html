@@ -1,0 +1,10 @@
+<button mat-button color="primary" (click)="openDialog()">
+    Add Card
+</button>
+
+
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)">
+    <mat-grid-tile *ngFor="let card of cards$ | async, let num = index">
+        <app-card [card]="card" [indexCard]="num"></app-card>
+    </mat-grid-tile>
+</mat-grid-list>
