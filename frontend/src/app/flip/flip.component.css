@@ -1,12 +1,12 @@
 ngx-flip {
-    height: 200px;
+    height: 400px;
     width: 200px;
 }
 
 .front {
     background-color: lightgreen;
     height: 100%;
-    display: flex;
+    display: inherit;
     justify-content: center;
     align-items: center;
 }
@@ -14,7 +14,7 @@ ngx-flip {
 .back {
     background-color: lightblue;
     height: 100%;
-    display: flex;
+    display: inherit;
     justify-content: center;
     align-items: center;
 }
