@@ -25,6 +25,7 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.card);
   }
 
   editCard() {
@@ -41,6 +42,10 @@ export class CardComponent implements OnInit {
   deleteCard() {
     this.store.dispatch(DeleteCard({ index: this.indexCard }));
 
+  }
+  flipStatus = false;
+  flipCard() {
+    this.flipStatus = !this.flipStatus;
   }
 
 }
