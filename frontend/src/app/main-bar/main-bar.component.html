@@ -7,7 +7,7 @@
                 <div class="flash-menu">
                     <button mat-button *ngIf="authService.isLoggedIn()" routerLink="/">Home</button>
                     <button mat-button *ngIf="authService.isLoggedIn()" routerLink="/review">Review</button>
-                    <button mat-button color="primary" *ngIf="authService.isLoggedIn() 
+                    <button mat-button *ngIf="authService.isLoggedIn() 
                     && authService.currentUser.role === 'admin'" routerLink="/users">Users</button>
                 </div>
                 <span class="example-spacer"></span>
