@@ -4,10 +4,12 @@ import { Card } from 'src/app/models/card.interface';
 
 export interface CardState {
     cards: Card[];
+    userId: string;
 }
 
 export const initialState: CardState = {
     cards: [],
+    userId: ''
 };
 
 const _dataReducer = createReducer(initialState,
@@ -42,6 +44,14 @@ const _dataReducer = createReducer(initialState,
         return {
             ...state,
             cards: cards
+        };
+
+    }),
+    on(action.LoadUser, (state, { userId }) => {
+        console.log(userId);
+        return {
+            ...state,
+            userId: userId
         };
 
     }),

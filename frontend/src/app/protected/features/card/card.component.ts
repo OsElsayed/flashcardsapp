@@ -1,7 +1,7 @@
 import { DeleteCard } from 'src/app/card-store/card/card.actions';
 import { Card } from 'src/app/models/card.interface';
 import { EditCardMode } from '../../../card-store/layout/layout.actions';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataStoreState } from 'src/app/card-store/data.reducer';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { CardFormComponent } from '../card-form/card-form.component';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() indexCard: number;
   @Input() card: Card;
 
@@ -22,10 +22,6 @@ export class CardComponent implements OnInit {
   constructor(public dialog: MatDialog, private store: Store<DataStoreState>) {
     this.mode$ = store.pipe(select(selectLayoutCardMode));
 
-  }
-
-  ngOnInit() {
-    console.log(this.card);
   }
 
   editCard() {

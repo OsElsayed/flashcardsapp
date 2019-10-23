@@ -9,6 +9,11 @@ export const selectCards = createSelector(
     (state: CardState) => state.cards
 );
 
+export const selectUserId = createSelector(
+    selectCardState,
+    (state: CardState) => state.userId
+);
+
 export const selectCardByIndex = (index: number) => createSelector(selectCards, (allItems) => {
     return allItems[index];
 });

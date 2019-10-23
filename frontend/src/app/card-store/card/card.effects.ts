@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 import { EMPTY, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataStoreState } from '..';
-import { selectCards } from './card.selector';
+import { selectCards, selectUserId, selectCardState } from './card.selector';
 
 @Injectable()
 export class CardEffects {
@@ -25,9 +25,9 @@ export class CardEffects {
             this.actions$.pipe(
                 ofType(AddCard, EditCard, DeleteCard),
                 concatMap(action => of(action).pipe(
-                    withLatestFrom(this.store.pipe(select(selectCards)))
+                    withLatestFrom(this.store.pipe(select(selectCardState)))
                 )),
-                exhaustMap(([action, cards]) => this.usersService.updateUserById(this.currentUser._id, { 'cards': cards })
+                exhaustMap(([action, cardState]) => this.usersService.updateUserById(cardState.userId, { 'cards': cardState.ards })
                     .pipe(
                         map(() => (AddCardSuccess)),
                         catchError(() => EMPTY)
@@ -39,7 +39,10 @@ export class CardEffects {
 
     loadCards$ = createEffect(() => this.actions$.pipe(
         ofType(LoadCards),
-        mergeMap(() => this.usersService.getUserCardsById(this.currentUser._id)
+        concatMap(action => of(action).pipe(
+            withLatestFrom(this.store.pipe(select(selectUserId)))
+        )),
+        mergeMap(([action, userId]) => this.usersService.getUserCardsById(userId)
             .pipe(
                 map((result: any) => result.user),
                 map((user: User) => (LoadCardsSuccess({ 'cards': user.cards }))),

@@ -4,7 +4,10 @@ export const ADD_CARD = '[Card] Add Card';
 export const EDIT_CARD = '[Card] Edit Card';
 export const DELETE_CARD = '[Card] Delete Card';
 export const LOAD_CARDS = '[Card] Load Card';
+export const LOAD_USER = '[User] Load User';
 
+
+export const LoadUser = createAction(LOAD_USER, props<{ userId: string }>());
 
 export const AddCard = createAction(ADD_CARD, props<{ card: Card }>());
 export const AddCardFail = createAction('[Card] Add Card Fail');
