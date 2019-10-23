@@ -27,7 +27,7 @@ export class CardEffects {
                 concatMap(action => of(action).pipe(
                     withLatestFrom(this.store.pipe(select(selectCardState)))
                 )),
-                exhaustMap(([action, cardState]) => this.usersService.updateUserById(cardState.userId, { 'cards': cardState.ards })
+                exhaustMap(([action, cardState]) => this.usersService.updateUserById(cardState.userId, { 'cards': cardState.cards })
                     .pipe(
                         map(() => (AddCardSuccess)),
                         catchError(() => EMPTY)
