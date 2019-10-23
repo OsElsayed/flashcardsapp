@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { LoadCards } from 'src/app/card-store/card';
+import { selectCards } from 'src/app/card-store/card/card.selector';
 import { DataStoreState } from '../../../card-store';
 import { Card } from '../../../models/card.interface';
 import { AuthService } from '../../../_service/auth.service';
 import { UsersService } from '../../../_service/users.service';
-import { LoadCards } from 'src/app/card-store/card';
-import { selectCards } from 'src/app/card-store/card/card.selector';
 
 @Component({
   selector: 'app-flip',
