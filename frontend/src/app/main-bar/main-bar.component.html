@@ -11,13 +11,13 @@
                     && authService.currentUser.role === 'admin'" routerLink="/users">Users</button>
                 </div>
                 <span class="example-spacer"></span>
-                <a mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" routerLink="/login">Sign In</a>
+                <button mat-button *ngIf="!authService.isLoggedIn()" routerLink="/login">Sign In</button>
                 <h2 class="smalltext" style="color: white;" *ngIf="authService.isLoggedIn()">Welcome :
                     {{authService.currentUser.name}}
                 </h2>
                 <a mat-raised-button color="warn" *ngIf="authService.isLoggedIn()" routerLink="/login"
                     (click)="authService.logout()">Sign Out</a>
-                <a mat-raised-button color="primary" *ngIf="!authService.isLoggedIn()" routerLink="/signup">Sign Up</a>
+                <button mat-button *ngIf="!authService.isLoggedIn()" routerLink="/signup">Sign Up</button>
             </mat-toolbar-row>
         </mat-toolbar>
         <!-- Add Content Here -->
